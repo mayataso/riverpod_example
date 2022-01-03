@@ -13,7 +13,14 @@ final _stateNotifierProvider = StateNotifierProvider(
   (ref) => StateNotifierCounter(),
 );
 final _futureProvider = FutureProvider<String>((ref) {
-  return Future.delayed(Duration(seconds: 5), () => 'done');
+  return Future.delayed(const Duration(seconds: 5), () => 'done');
+});
+final _streamProvider = StreamProvider.autoDispose<int>((ref) async* {
+  var count = 0;
+  for (int i = 0; i < 100; i++) {
+    await Future.delayed(const Duration(seconds: 1));
+    yield count++;
+  }
 });
 
 void main() {
@@ -62,6 +69,8 @@ class MyHomePage extends StatelessWidget {
             _buildConsumerWidgetTestArea(),
             const SizedBox(height: 24),
             _buildFutureProviderTestArea(),
+            const SizedBox(height: 24),
+            _buildStreamProviderTestArea(),
             const SizedBox(height: 24),
           ],
         ),
@@ -154,6 +163,29 @@ class MyHomePage extends StatelessWidget {
   Widget _getFutureStateWidget({required WidgetRef ref}) {
     return ref.watch(_futureProvider).when(
         data: (data) => Text('get data -> $data.'),
+        loading: () => const CircularProgressIndicator(),
+        error: (error, stack) => const Text('Error!'));
+  }
+
+  // Stream Provider
+  // Future Providerと大体同じ
+  // 継続的な値の変化に対応できる。ポーリング処理にも使えそう？
+  _buildStreamProviderTestArea() {
+    return Column(
+      children: [
+        const Text('StreamProvider Counter'),
+        Consumer(
+          builder: (context, ref, child) {
+            return _getStreamStateWidget(ref: ref);
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _getStreamStateWidget({required WidgetRef ref}) {
+    return ref.watch(_streamProvider).when(
+        data: (data) => Text('count = $data'),
         loading: () => const CircularProgressIndicator(),
         error: (error, stack) => const Text('Error!'));
   }
