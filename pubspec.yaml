@@ -33,7 +33,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flutter_riverpod: ^1.0.3 # 状態管理
+  flutter_hooks: ^0.18.0 # React的なHooksが使える
+  hooks_riverpod: ^1.0.3 # 状態管理 (flutter_hooksを併用できる)
   simple_logger: ^1.9.0 # ログ出力
   adaptive_dialog: ^1.2.0 # ダイアログ、モーダルアクションを最適化
   recase: ^4.0.0 # 文字列をパスカルケース、スネークケース等で相互変換

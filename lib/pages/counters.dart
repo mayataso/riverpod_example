@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_sample/models/counter_changenotifier.dart';
 import 'package:riverpod_sample/models/counter_statenotifier.dart';
-import 'package:riverpod_sample/providers/providers.dart';
 import 'package:riverpod_sample/widgets/consumer_test_widget.dart';
 
 // RiverpodではグローバルにProvider宣言できる
@@ -121,7 +120,7 @@ class CountersPage extends StatelessWidget {
   // 実装はシンプルになるが再レンダリング範囲が広範囲に及ぶため、パフォーマンス重視なら
   // Consumer Widgetを小さいスコープで定義していったほうが良さそう?
   _buildConsumerWidgetTestArea() {
-    return const ConsumerTestWidget();
+    return ConsumerTestWidget();
   }
 
   // Future Provider
