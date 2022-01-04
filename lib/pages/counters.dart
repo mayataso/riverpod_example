@@ -119,7 +119,7 @@ class CountersPage extends StatelessWidget {
 
   // ConsumerWidgetをextendsした場合のProviderアクセス
   // 実装はシンプルになるが再レンダリング範囲が広範囲に及ぶため、パフォーマンス重視なら
-  // Consumer Widgetを小さいスコープで定義していったほうが良さそう
+  // Consumer Widgetを小さいスコープで定義していったほうが良さそう?
   _buildConsumerWidgetTestArea() {
     return const ConsumerTestWidget();
   }
@@ -133,18 +133,14 @@ class CountersPage extends StatelessWidget {
         const Text('FutureProvider Counter'),
         Consumer(
           builder: (context, ref, child) {
-            return _getFutureStateWidget(ref: ref);
+            return ref.watch(_futureProvider).when(
+                data: (data) => Text('get data -> $data.'),
+                loading: () => const CircularProgressIndicator(),
+                error: (error, stack) => const Text('Error!'));
           },
         ),
       ],
     );
-  }
-
-  Widget _getFutureStateWidget({required WidgetRef ref}) {
-    return ref.watch(_futureProvider).when(
-        data: (data) => Text('get data -> $data.'),
-        loading: () => const CircularProgressIndicator(),
-        error: (error, stack) => const Text('Error!'));
   }
 
   // Stream Provider
@@ -156,17 +152,13 @@ class CountersPage extends StatelessWidget {
         const Text('StreamProvider Counter'),
         Consumer(
           builder: (context, ref, child) {
-            return _getStreamStateWidget(ref: ref);
+            return ref.watch(_streamProvider).when(
+                data: (data) => Text('count = $data'),
+                loading: () => const CircularProgressIndicator(),
+                error: (error, stack) => const Text('Error!'));
           },
         ),
       ],
     );
-  }
-
-  Widget _getStreamStateWidget({required WidgetRef ref}) {
-    return ref.watch(_streamProvider).when(
-        data: (data) => Text('count = $data'),
-        loading: () => const CircularProgressIndicator(),
-        error: (error, stack) => const Text('Error!'));
   }
 }
