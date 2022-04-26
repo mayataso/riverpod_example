@@ -38,6 +38,7 @@ dependencies:
   simple_logger: ^1.9.0 # ログ出力
   adaptive_dialog: ^1.2.0 # ダイアログ、モーダルアクションを最適化
   recase: ^4.0.0 # 文字列をパスカルケース、スネークケース等で相互変換
+  gap: ^2.0.0 # 自動で縦横判別してマージン設置
 
   # Firebase
   # firebase_auth: ^3.1.3 # Firebase Authentication

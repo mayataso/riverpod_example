@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_sample/pages/counter_changenotifier.dart';
 import 'package:riverpod_sample/pages/counter_statenotifier.dart';
@@ -42,15 +43,15 @@ class CountersPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _buildChangeProviderTestArea(),
-            const SizedBox(height: 24),
+            const Gap(24),
             _buildStateProviderTestArea(),
-            const SizedBox(height: 24),
+            const Gap(24),
             _buildConsumerWidgetTestArea(),
-            const SizedBox(height: 24),
+            const Gap(24),
             _buildFutureProviderTestArea(),
-            const SizedBox(height: 24),
+            const Gap(24),
             _buildStreamProviderTestArea(),
-            const SizedBox(height: 24),
+            const Gap(24),
           ],
         ),
       ),
