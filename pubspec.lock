@@ -7,7 +7,7 @@ packages:
       name: adaptive_dialog
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.5.0+1"
   animations:
     dependency: transitive
     description:
@@ -82,7 +82,7 @@ packages:
       name: flutter_hooks
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.18.2"
+    version: "0.18.3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -157,7 +157,7 @@ packages:
       name: pedantic_mono
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.14.0+1"
+    version: "1.18.0"
   recase:
     dependency: "direct main"
     description:
@@ -204,7 +204,7 @@ packages:
       name: state_notifier
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2+1"
   stream_channel:
     dependency: transitive
     description:
@@ -248,5 +248,5 @@ packages:
     source: hosted
     version: "2.1.1"
 sdks:
-  dart: ">=2.14.0 <3.0.0"
+  dart: ">=2.16.0 <3.0.0"
   flutter: ">=1.20.0"
