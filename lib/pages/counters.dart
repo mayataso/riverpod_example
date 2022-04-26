@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_sample/models/counter_changenotifier.dart';
-import 'package:riverpod_sample/models/counter_statenotifier.dart';
+import 'package:riverpod_sample/pages/counter_changenotifier.dart';
+import 'package:riverpod_sample/pages/counter_statenotifier.dart';
 import 'package:riverpod_sample/widgets/consumer_test_widget.dart';
 
 // RiverpodではグローバルにProvider宣言できる

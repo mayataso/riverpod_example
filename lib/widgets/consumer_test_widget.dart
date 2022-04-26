@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 // hooks_riverpodでは、flutter_riverpod + Hooksが利用できる
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_sample/models/counter_changenotifier.dart';
+import 'package:riverpod_sample/pages/counter_changenotifier.dart';
 
 final _provider = ChangeNotifierProvider(
   (ref) => ChangeNotifierCounter(),
