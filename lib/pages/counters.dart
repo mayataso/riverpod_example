@@ -5,16 +5,6 @@ import 'package:riverpod_sample/pages/counter_changenotifier.dart';
 import 'package:riverpod_sample/pages/counter_statenotifier.dart';
 import 'package:riverpod_sample/widgets/consumer_test_widget.dart';
 
-// RiverpodではグローバルにProvider宣言できる
-final _cnangeNotifierProvider = ChangeNotifierProvider(
-  (ref) => ChangeNotifierCounter(),
-);
-// autoDisposeを使うと、Widgetからの購読が無くなったタイミングでdisposeしてくれる。
-// その場合、Test時に注意が必要。下記参照
-// https://zenn.dev/omtians9425/articles/4a74f982788bdb
-final _stateNotifierProvider = StateNotifierProvider.autoDispose(
-  (ref) => StateNotifierCounter(),
-);
 final _futureProvider = FutureProvider<String>((ref) {
   return Future.delayed(const Duration(seconds: 5), () => 'done');
 });
@@ -69,7 +59,7 @@ class CountersPage extends StatelessWidget {
             const Text('ChangeNotifierProvider Counter'),
             Consumer(builder: (context, ref, child) {
               // 従来のProvider watchと同様の動作
-              return Text('${ref.watch(_cnangeNotifierProvider).count}');
+              return Text('${ref.watch(changeNotifierProvider).count}');
             }),
           ],
         ),
@@ -77,7 +67,7 @@ class CountersPage extends StatelessWidget {
           return FloatingActionButton(
             onPressed: () {
               // 従来のProvider readと同様の動作
-              ref.read(_cnangeNotifierProvider).increment();
+              ref.read(changeNotifierProvider).increment();
             },
             tooltip: 'Increment',
             child: const Icon(Icons.add),
@@ -99,7 +89,7 @@ class CountersPage extends StatelessWidget {
             Consumer(builder: (context, ref, child) {
               // この方法だと1StateNotifierにつき1つのプロパティがバインドされる
               // freezedを使うと複数プロパティの管理もできる
-              return Text('${ref.watch(_stateNotifierProvider)}');
+              return Text('${ref.watch(stateNotifierProvider)}');
             }),
           ],
         ),
@@ -107,7 +97,7 @@ class CountersPage extends StatelessWidget {
           return FloatingActionButton(
             onPressed: () {
               // NotifierProvider.notifierをreadすることでメソッドにアクセスできる
-              ref.read(_stateNotifierProvider.notifier).increment();
+              ref.read(stateNotifierProvider.notifier).increment();
             },
             tooltip: 'Increment',
             child: const Icon(Icons.add),
