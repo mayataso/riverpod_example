@@ -38,13 +38,7 @@ dependencies:
   simple_logger: ^1.9.0 # ログ出力
   adaptive_dialog: ^1.2.0 # ダイアログ、モーダルアクションを最適化
   gap: ^2.0.0 # 自動で縦横判別してマージン設置
-
-  # Firebase
-  # firebase_auth: ^3.1.3 # Firebase Authentication
-  # firebase_remote_config: ^0.11.0+1 # Remote Config
-  # firebase_crashlytics: ^2.2.3 # クラッシュレポート
-  # firebase_messaging: ^10.0.8 # push通知
-  # firebase_analytics: ^8.3.3 # Google Analytics
+  go_router: ^4.1.0 # Providerを便利にしてくれる
 
 dev_dependencies:
   pedantic_mono: ^1.14.0+1 # 静的解析強化
