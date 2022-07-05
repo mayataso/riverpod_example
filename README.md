@@ -1,7 +1,7 @@
 # riverpod_sample
 
 Flutter Riverpod のサンプルリポジトリ。
-特にRiverpod, GoRouter等の新しい技術を使いつつ、アプリの構成に必須の機能をまとめたサンプル実装を目指します。
+ルーティングにGoRouterを利用している。
 
 ## 環境
 - Flutter3
@@ -11,6 +11,7 @@ Flutter Riverpod のサンプルリポジトリ。
 ### Riverpod
 - Providerを使いやすくするラッパーパッケージ。
 - `hooks_riverpod` を併用することでReact Hooksと同様のHooks機能を併用できる。
+- [公式](https://riverpod.dev/ja/docs/concepts/providers)
 
 ### GoRouter
 - Navigator 2.0のラッパーパッケージ。
