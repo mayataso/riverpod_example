@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_sample/pages/counter_changenotifier.dart';
-import 'package:riverpod_sample/pages/counter_statenotifier.dart';
-import 'package:riverpod_sample/widgets/consumer_test_widget.dart';
-
-final _futureProvider = FutureProvider<String>((ref) {
-  return Future.delayed(const Duration(seconds: 5), () => 'done');
-});
-final _streamProvider = StreamProvider.autoDispose<int>((ref) async* {
-  var count = 0;
-  for (int i = 0; i < 100; i++) {
-    await Future.delayed(const Duration(seconds: 1));
-    yield count++;
-  }
-});
+import 'package:riverpod_sample/providers/pages/counter_change_notifier_provider.dart';
+import 'package:riverpod_sample/providers/pages/counter_future_provider.dart';
+import 'package:riverpod_sample/providers/pages/counter_state_notifier_provider.dart';
+import 'package:riverpod_sample/providers/pages/counter_stream_provider.dart';
 
 class CountersPage extends StatelessWidget {
   const CountersPage({Key? key}) : super(key: key);
@@ -33,8 +23,6 @@ class CountersPage extends StatelessWidget {
             _buildChangeProviderTestArea(),
             const Gap(24),
             _buildStateProviderTestArea(),
-            const Gap(24),
-            _buildConsumerWidgetTestArea(),
             const Gap(24),
             _buildFutureProviderTestArea(),
             const Gap(24),
@@ -105,23 +93,15 @@ class CountersPage extends StatelessWidget {
     );
   }
 
-  // ConsumerWidgetをextendsした場合のProviderアクセス
-  // 実装はシンプルになるが再レンダリング範囲が広範囲に及ぶため、パフォーマンス重視なら
-  // Consumer Widgetを小さいスコープで定義していったほうが良さそう?
-  _buildConsumerWidgetTestArea() {
-    return ConsumerTestWidget();
-  }
-
   // Future Provider
-  // 非同期で値を得る場合に、状態を切り分けられて便利
-  // FutureBuilder的なもの？
+  // 非同期で値を得る場合に、状態を切り分けられる
   _buildFutureProviderTestArea() {
     return Column(
       children: [
         const Text('FutureProvider Counter'),
         Consumer(
           builder: (context, ref, child) {
-            return ref.watch(_futureProvider).when(
+            return ref.watch(futureProvider).when(
                 data: (data) => Text('get data -> $data.'),
                 loading: () => const CircularProgressIndicator(),
                 error: (error, stack) => const Text('Error!'));
@@ -133,14 +113,14 @@ class CountersPage extends StatelessWidget {
 
   // Stream Provider
   // Future Providerと大体同じ
-  // 継続的な値の変化に対応できる。ポーリング処理にも使えそう？
+  // 継続的な値の変化に対応できる。
   _buildStreamProviderTestArea() {
     return Column(
       children: [
         const Text('StreamProvider Counter'),
         Consumer(
           builder: (context, ref, child) {
-            return ref.watch(_streamProvider).when(
+            return ref.watch(streamProvider).when(
                 data: (data) => Text('count = $data'),
                 loading: () => const CircularProgressIndicator(),
                 error: (error, stack) => const Text('Error!'));
