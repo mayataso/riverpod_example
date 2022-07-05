@@ -1,47 +1,31 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recase/recase.dart';
+import 'package:go_router/go_router.dart';
 import 'package:riverpod_sample/pages/counters.dart';
 
-final routerProvider = Provider((_) => _Router());
-
-class _Router {
-  final Map<String, WidgetBuilder> pushRoutes = {
-    CountersPage.routeName: (_) => const CountersPage(),
-  };
-
-  Route onGenerateRoute(RouteSettings settings) {
-    final pushPage = pushRoutes[settings.name]!;
-    return MaterialPageRoute<void>(
-      settings: settings,
-      builder: pushPage,
-    );
-  }
-}
-
-String pascalCaseFromRouteName(String name) => name.substring(1).pascalCase;
-
-@immutable
-class PageInfo {
-  PageInfo({
-    required this.routeName,
-    String? pageName,
-    this.subTitle,
-  }) : pageName = pageName ?? pascalCaseFromRouteName(routeName);
-
-  final String routeName;
-  final String pageName;
-  final String? subTitle;
-
-  static List<PageInfo> get all => [
-        ...[
-          CountersPage.routeName,
-        ].map((rn) => PageInfo(routeName: rn)),
-        PageInfo(
-          routeName: CountersPage.routeName,
-          pageName: 'Counters',
-          subTitle: 'Update Selection',
+final routerProvider = Provider(
+  (ref) => GoRouter(
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const CountersPage(),
+      ),
+    ],
+    redirect: (state) {
+      // logger.info('router: redirect, error = ${state.error}');
+      return null;
+      // リダイレクト処理 (未ログイン時、強制的にログイン画面に遷移等)
+    },
+    // 監視するProvider
+    // refreshListenable: ref.watch(loginProvider),
+    // エラー時に遷移するページについて定義
+    errorPageBuilder: (context, state) => MaterialPage(
+      key: state.pageKey,
+      child: Scaffold(
+        body: Center(
+          child: Text(state.error.toString()),
         ),
-      ];
-}
+      ),
+    ),
+  ),
+);

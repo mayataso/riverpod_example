@@ -19,8 +19,6 @@ final _streamProvider = StreamProvider.autoDispose<int>((ref) async* {
 class CountersPage extends StatelessWidget {
   const CountersPage({Key? key}) : super(key: key);
 
-  static String routeName = "/";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
